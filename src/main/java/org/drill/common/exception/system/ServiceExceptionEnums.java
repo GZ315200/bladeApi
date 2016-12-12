@@ -6,7 +6,11 @@ package org.drill.common.exception.system;
 public enum ServiceExceptionEnums {
 
     USERNAME_OR_PASSWORD_IS_NOT_CORRECT("用户或密码错误, 请重试","100001"),
-    SYSTEM_ERROR("系统错误，请稍后重试","100002");
+    USERCODE_NOT_EXIST("用户不存在","100003"),
+    SYSTEM_ERROR("系统错误，请稍后重试","100002"),
+    PASSWORD_NOT_CORRECT("密码不正确","100004")
+
+    ;
 
 
     ServiceExceptionEnums(String message, String code) {

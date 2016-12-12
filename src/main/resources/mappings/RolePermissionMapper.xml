@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.drill.dao.RoleMapper" >
-  <resultMap id="BaseResultMap" type="Role" >
+<mapper namespace="org.drill.dao.RolePermissionMapper" >
+  <resultMap id="BaseResultMap" type="RolePermission" >
     <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="available" property="available" jdbcType="CHAR" />
+    <result column="tx_role_id" property="txRoleId" jdbcType="VARCHAR" />
+    <result column="tx_permission_id" property="txPermissionId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,16 +65,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, available
+    id, tx_role_id, tx_permission_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="RoleExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="RolePermissionExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from tx_role
+    from tx_role_permission
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,67 +85,67 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from tx_role
+    from tx_role_permission
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from tx_role
+    delete from tx_role_permission
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="RoleExample" >
-    delete from tx_role
+  <delete id="deleteByExample" parameterType="RolePermissionExample" >
+    delete from tx_role_permission
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="Role" >
-    insert into tx_role (id, name, available
+  <insert id="insert" parameterType="RolePermission" >
+    insert into tx_role_permission (id, tx_role_id, tx_permission_id
       )
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{available,jdbcType=CHAR}
+    values (#{id,jdbcType=VARCHAR}, #{txRoleId,jdbcType=VARCHAR}, #{txPermissionId,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="Role" >
-    insert into tx_role
+  <insert id="insertSelective" parameterType="RolePermission" >
+    insert into tx_role_permission
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="name != null" >
-        name,
+      <if test="txRoleId != null" >
+        tx_role_id,
       </if>
-      <if test="available != null" >
-        available,
+      <if test="txPermissionId != null" >
+        tx_permission_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+      <if test="txRoleId != null" >
+        #{txRoleId,jdbcType=VARCHAR},
       </if>
-      <if test="available != null" >
-        #{available,jdbcType=CHAR},
+      <if test="txPermissionId != null" >
+        #{txPermissionId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="RoleExample" resultType="java.lang.Integer" >
-    select count(8) from tx_role
+  <select id="countByExample" parameterType="RolePermissionExample" resultType="java.lang.Integer" >
+    select count(*) from tx_role_permission
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update tx_role
+    update tx_role_permission
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.txRoleId != null" >
+        tx_role_id = #{record.txRoleId,jdbcType=VARCHAR},
       </if>
-      <if test="record.available != null" >
-        available = #{record.available,jdbcType=CHAR},
+      <if test="record.txPermissionId != null" >
+        tx_permission_id = #{record.txPermissionId,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -153,30 +153,30 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update tx_role
+    update tx_role_permission
     set id = #{record.id,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      available = #{record.available,jdbcType=CHAR}
+      tx_role_id = #{record.txRoleId,jdbcType=VARCHAR},
+      tx_permission_id = #{record.txPermissionId,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="Role" >
-    update tx_role
+  <update id="updateByPrimaryKeySelective" parameterType="RolePermission" >
+    update tx_role_permission
     <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
+      <if test="txRoleId != null" >
+        tx_role_id = #{txRoleId,jdbcType=VARCHAR},
       </if>
-      <if test="available != null" >
-        available = #{available,jdbcType=CHAR},
+      <if test="txPermissionId != null" >
+        tx_permission_id = #{txPermissionId,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="Role" >
-    update tx_role
-    set name = #{name,jdbcType=VARCHAR},
-      available = #{available,jdbcType=CHAR}
+  <update id="updateByPrimaryKey" parameterType="RolePermission" >
+    update tx_role_permission
+    set tx_role_id = #{txRoleId,jdbcType=VARCHAR},
+      tx_permission_id = #{txPermissionId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

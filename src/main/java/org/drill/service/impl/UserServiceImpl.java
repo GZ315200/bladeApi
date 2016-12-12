@@ -1,12 +1,17 @@
 package org.drill.service.impl;
 
-import org.drill.dao.UserDao;
-import org.drill.module.po.User;
+import org.drill.common.exception.system.ServiceException;
+import org.drill.common.exception.system.ServiceExceptionEnums;
+import org.drill.dao.UserMapper;
+import org.drill.model.po.User;
+import org.drill.model.po.UserExample;
+import org.drill.model.vo.ActiveUser;
 import org.drill.service.UserService;
+import org.drill.utils.MD5;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -16,22 +21,17 @@ import java.util.List;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    @Resource
-    UserDao userDao;
+    private final UserMapper userMapper;
 
-
-    @Override
-    public List<User> findAll() {
-        return null;
+    @Autowired
+    public UserServiceImpl(UserMapper userMapper) {
+        this.userMapper = userMapper;
     }
 
-    @Override
-    public User findUserById(Integer id) {
-       return userDao.getById(id);
-    }
 
     @Override
-    public User findUserByLoginName(String loginName) {
+    public ActiveUser authenticate(String userCode, String password) throws Exception {
+
         return null;
     }
 }

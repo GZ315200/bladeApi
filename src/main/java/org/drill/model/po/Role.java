@@ -1,22 +1,22 @@
-package org.drill.module.po;
+package org.drill.model.po;
 
-import java.io.Serializable;
 
-/**
- * Created by gygesM on 2016/12/1.
- */
-public class Role implements Serializable{
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Role {
     private String id;
+
     private String name;
-    private String available;//(0:不可用，1：可用)
+
+    private String available;
 
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.id = id == null ? null : id.trim();
     }
 
     public String getName() {
@@ -24,7 +24,7 @@ public class Role implements Serializable{
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name == null ? null : name.trim();
     }
 
     public String getAvailable() {
@@ -32,6 +32,6 @@ public class Role implements Serializable{
     }
 
     public void setAvailable(String available) {
-        this.available = available;
+        this.available = available == null ? null : available.trim();
     }
 }
