@@ -40,12 +40,19 @@
         <setting name="jdbcTypeForNull" value="NULL"/>
     </settings>
 
-    <!-- 类型别名 -->
+     <!--类型别名 -->
     <typeAliases>
         <!--<typeAlias alias="Page" type="org.drill.common.persistence.Page"/>&lt;!&ndash;分页  &ndash;&gt;-->
-        <typeAlias alias="User" type="org.drill.module.po.User"/>
-        <typeAlias type="org.drill.module.po.Permission" alias="Permission"/>
-        <typeAlias type="org.drill.module.po.Role" alias="Role"/>
+        <typeAlias alias="User" type="org.drill.model.po.User"/>
+        <typeAlias type="org.drill.model.po.Permission" alias="Permission"/>
+        <typeAlias type="org.drill.model.po.Role" alias="Role"/>
+        <typeAlias type="org.drill.model.po.RolePermission" alias="RolePermission"/>
+        <typeAlias type="org.drill.model.po.UserRole" alias="UserRole"/>
+        <typeAlias type="org.drill.model.po.PermissionExample" alias="PermissionExample"/>
+        <typeAlias type="org.drill.model.po.RolePermissionExample" alias="RolePermissionExample"/>
+        <typeAlias type="org.drill.model.po.UserRoleExample" alias="UserRoleExample"/>
+        <typeAlias type="org.drill.model.po.RoleExample" alias="RoleExample"/>
+        <typeAlias type="org.drill.model.po.UserExample" alias="UserExample"/>
     </typeAliases>
     <typeHandlers>
         <typeHandler handler="org.apache.ibatis.type.EnumTypeHandler" javaType="java.math.RoundingMode"/>

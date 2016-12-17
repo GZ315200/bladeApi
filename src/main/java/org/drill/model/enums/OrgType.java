@@ -1,4 +1,4 @@
-package org.drill.module.enums;
+package org.drill.model.enums;
 
 /**
  * Created by gygesM on 2016/11/24.
