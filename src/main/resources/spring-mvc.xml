@@ -12,7 +12,10 @@
 
     <!--加载properties文件-->
     <context:property-placeholder location="classpath:application.properties" ignore-unresolvable="true"/>
-    <context:component-scan base-package="org.drill.controller,org.drill.common"/>
+
+    <context:component-scan base-package="org.drill.controller" use-default-filters="false"><!-- base-package 如果多个，用“,”分隔 -->
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/> <!-- 子标签是用来添加扫描注解的 -->
+    </context:component-scan>
     <!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
 
     <!-- 定义视图文件解析 -->
@@ -22,6 +25,10 @@
         <property name="suffix" value="${web.view.suffix}"/>
     </bean>
 
+    <!-- 对静态资源文件的访问， 将无法mapping到Controller的path交给default servlet handler处理 -->
+    <mvc:default-servlet-handler />
+    <!-- 静态资源映射 -->
+    <mvc:resources mapping="/resources/**" location="/resources/" cache-period="31536000"/>
 
     <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
     <mvc:message-converters register-defaults="true">
@@ -53,5 +60,15 @@
         <property name="ignoreAcceptHeader" value="true"/>
         <property name="favorPathExtension" value="true"/>
     </bean>
+
+    <!--拦截器 http请求在8AM——6PM-->
+    <bean id="workTimeInterceptor" class="org.drill.interceptor.WorkTimeInterceptor">
+        <property name="closingTime" value="${closeTime}"/>
+        <property name="openingTime" value="${openTime}"/>
+    </bean>
+
+    <mvc:interceptors>
+        <ref bean="workTimeInterceptor"/>
+    </mvc:interceptors>
 
 </beans>

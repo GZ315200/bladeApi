@@ -4,7 +4,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.drill.model.po.UserRole;
 import org.drill.model.po.UserRoleExample;
+import org.springframework.stereotype.Repository;
 
+
+@Repository
 public interface UserRoleMapper {
 
     int countByExample(UserRoleExample example);

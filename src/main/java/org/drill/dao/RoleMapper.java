@@ -4,8 +4,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.drill.model.po.Role;
 import org.drill.model.po.RoleExample;
+import org.springframework.stereotype.Repository;
 
 
+@Repository
 public interface RoleMapper {
     int countByExample(RoleExample example);
 

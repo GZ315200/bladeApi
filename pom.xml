@@ -398,79 +398,73 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>3.5.0</version>
+        </dependency>
+
         <!--scala-->
         <!--<dependency>-->
-            <!--<groupId>org.springframework.scala</groupId>-->
-            <!--<artifactId>spring-scala</artifactId>-->
-            <!--<version>1.0.0.M2</version>-->
+        <!--<groupId>org.springframework.scala</groupId>-->
+        <!--<artifactId>spring-scala</artifactId>-->
+        <!--<version>1.0.0.M2</version>-->
         <!--</dependency>-->
 
     </dependencies>
 
     <!-- 设定主仓库，按设定顺序进行查找。 -->
     <repositories>
-
         <repository>
-            <id>gyges-repos</id>
-            <name>safe Repository</name>
+            <id>nexus-aliyun</id>
+            <name>Nexus aliyun</name>
+            <layout>default</layout>
             <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
         </repository>
-
     </repositories>
 
-    <!-- 设定插件仓库 -->
-    <!--<pluginRepositories>-->
+    设定插件仓库
+    <pluginRepositories>
 
-        <!--<pluginRepository>-->
-            <!--<id>safe-repos</id>-->
-            <!--<name>safe Repository</name>-->
-            <!--<url>http://maven.aliyun.com/nexus/content/groups/public</url>-->
-        <!--</pluginRepository>-->
+        <pluginRepository>
+            <id>safe-repos</id>
+            <name>safe Repository</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+        </pluginRepository>
 
-    <!--</pluginRepositories>-->
+    </pluginRepositories>
+
+
     <build>
-    <finalName>bladeApi</finalName>
-    <!--<resources>-->
-    <!--<resource>-->
-    <!--<directory>src/main/resources</directory>-->
-    <!--<filtering>true</filtering>-->
-    <!--<includes>-->
-    <!--<include>*.sql</include>-->
-    <!--<include>*.xml</include>-->
-    <!--<include>*.html</include>-->
-    <!--<include>*.txt</include>-->
-    <!--<include>*.json</include>-->
-    <!--<include>*.properties</include>-->
-    <!--</includes>-->
-    <!--</resource>-->
+        <finalName>bladeApi</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.0</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
 
-    <!--<resource>-->
-    <!--<directory>src/main/java</directory>-->
-    <!--<filtering>true</filtering>-->
-    <!--<includes>-->
-    <!--<include>**/*.crt</include>-->
-    <!--<include>**/*.vm</include>-->
-    <!--</includes>-->
-    <!--</resource>-->
-    <!--</resources>-->
-
-    <plugins>
-        <plugin>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.0</version>
-            <configuration>
-                <source>1.8</source>
-                <target>1.8</target>
-                <encoding>UTF-8</encoding>
-            </configuration>
-        </plugin>
-        <!--<plugin>-->
-        <!--<groupId>org.apache.maven.plugins</groupId>-->
-        <!--<artifactId>maven-surefire-plugin</artifactId>-->
-        <!--<configuration>-->
-        <!--<skip>true</skip>-->
-        <!--</configuration>-->
-        <!--</plugin> q-->
-    </plugins>
-</build>
+            <!-- maven-assembly-plugin：处理资源
+              (maven-resources-plugin则用来处理资源文件。默认的主资源文件目录是src/main/resources，
+              很多用户会需要添加额外的资源文件目录，这个时候就可以通过配置maven-resources-plugin来实现。) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

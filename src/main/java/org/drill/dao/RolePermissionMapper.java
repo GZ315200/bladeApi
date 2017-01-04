@@ -4,8 +4,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.drill.model.po.RolePermission;
 import org.drill.model.po.RolePermissionExample;
+import org.springframework.stereotype.Repository;
 
 
+@Repository
 public interface RolePermissionMapper {
     int countByExample(RolePermissionExample example);
 

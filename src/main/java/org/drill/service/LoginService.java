@@ -15,4 +15,6 @@ public interface LoginService {
      * @throws Exception
      */
     public ActiveUser authenticate(String userCode, String password) throws Exception;
+
+
 }

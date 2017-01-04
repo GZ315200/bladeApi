@@ -79,8 +79,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 		String regEx = "<.+?>";
 		Pattern p = Pattern.compile(regEx);
 		Matcher m = p.matcher(html);
-		String s = m.replaceAll("");
-		return s;
+		return m.replaceAll("");
 	}
 	
 	/**
